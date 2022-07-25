@@ -3,12 +3,12 @@
 name: Validacao Anchore
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]s
-  schedule:
-    - cron: '25 17 * * 6'
+    branches: [main]
+
 
 permissions:
   contents: read
