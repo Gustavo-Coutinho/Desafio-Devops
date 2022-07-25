@@ -6,7 +6,9 @@ Abra um terminal no diretório web/ e execute o comando:
     docker compose up
 ## Como testar a aplicação Django
 Após executar o projeto, abra uma nova janela do terminal e execute o comando:
+
     docker exec -it frexco-app "python manage.py test"
+
 ## Visão geral dos requisitos
 ### :white_check_mark: 1. Aplicação deverá conter um arquivo Dockerfile para realizar a build (construção da aplicação)
 ### :white_check_mark: 2. O arquivo responsável por subir o container deverá ser o Docker-compose contendo as demais informações (Ex. porta, nome, imagem e etc...)
