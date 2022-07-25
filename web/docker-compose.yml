@@ -1,0 +1,54 @@
+version: "3.9"
+
+# Criando volume para o banco de dados:
+volumes:
+  frexco-bd:
+
+# Criando rede que será usada pelos containers:
+networks:
+  frexco-bridge:
+    driver: bridge
+
+# Iniciando composição dos containers:
+services:
+    # Imagem do banco de dados:
+    frexco-postgres:
+      image: postgres
+      restart: always
+      container_name: postgres
+      volumes:
+        - frexco-bd:/var/lib/postgresql/data
+      networks:
+        - frexco-bridge
+      ports:
+        - 5432:5432
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+
+    # Aplicação Django que recebe dados do banco do arquivo .env:
+    frexco-app:
+      build: .
+      container_name: frexco-app
+      restart: on-failure
+      env_file: ../.env
+      networks:
+        - frexco-bridge
+      # Porta 3000, onde o frexco-app vai executar, só é acessível para os containers desse docker-compose.yml
+      expose:
+        - "3000"
+      depends_on:
+        - frexco-postgres
+      command: gunicorn docker_django.wsgi:application --workers 2 -b 0.0.0.0:3000
+
+    # Servidor NGINX que pega o conteúdo da porta 3000 e apresenta ela na porta 80
+    frexco-nginx:
+      build: ../nginx/
+      restart: on-failure
+      container_name: servidor
+      ports:
+        - 80:80
+      networks:
+        - frexco-bridge
+      depends_on:
+        - frexco-app
