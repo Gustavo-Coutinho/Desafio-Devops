@@ -1,9 +1,10 @@
 ## Desafio DevOps concluído!
 Após cerca de 36 horas dedicadas a esse projeto, consegui concluir a entrega dentro de 5 dias. Apesar de ser uma aplicação simples, os procedimentos de elaboração de container, docker-compose e github actions precisam ser muito bem estudados. Sendo assim, acredito que esse projeto me ensinou um pouco de como uma empresa real (Frexco) trabalha com os conceitos de DevOps. 
 ## Como executar o projeto
-Abra um terminal no diretório web/ e execute o comando:
+Após clonar o repositório, abra em sua máquina um terminal no diretório web/ e execute o comando:
 
     docker compose up
+> **_NOTA:_**  Você precisa ter instalado em sua máquina o [Docker](https://www.docker.com/products/docker-desktop/) e o [Docker-compose](https://docs.docker.com/compose/install/compose-plugin/#install-the-plugin-manually).
 ## Como testar a aplicação Django
 Após executar o projeto, abra uma nova janela do terminal e execute o comando:
 
